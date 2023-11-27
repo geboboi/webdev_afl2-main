@@ -12,6 +12,7 @@ class Shop extends Model
 
     protected $fillable = [
         'product_id',
+        'shop_name',
         'address',
     ];
     public function avail(): BelongsTo {

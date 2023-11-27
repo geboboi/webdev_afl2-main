@@ -19,6 +19,7 @@ class ShopFactory extends Factory
         return [
             'product_id' => mt_rand(1,5),
             'address' => fake()->streetAddress,
+            'shop_name' => fake()->userName,
         ];
     }
 }

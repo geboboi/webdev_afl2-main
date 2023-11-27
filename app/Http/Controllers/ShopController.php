@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreShopRequest;
 use App\Http\Requests\UpdateShopRequest;
 use App\Models\Shop;
+use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $shops = Shop::all();
+        if ($request->has('search')){
+            $shops = Shop::where('address', 'like', '%'.$request->search.'%')->orWhere('shop_name', 'like', '%'.$request->search.'%')->paginate(5)->withQueryString();
+        } else {
+            $shops = Shop::paginate(5);
+        }
         return view('shop', [
             'title' => ' Shop',
             'shops' => $shops
